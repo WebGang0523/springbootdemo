@@ -9,10 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Component
 public class DBUserDetailManager implements UserDetailsManager, UserDetailsPasswordService  {
 
     @Resource
@@ -24,8 +26,12 @@ public class DBUserDetailManager implements UserDetailsManager, UserDetailsPassw
     }
 
     @Override
-    public void createUser(UserDetails user) {
-
+    public void createUser(UserDetails userDetails) {
+        User user = new User();
+        user.setUsername(userDetails.getUsername());
+        user.setPassword(userDetails.getPassword());
+        user.setEnabled(1);
+        userMapper.insert(user);
     }
 
     @Override

@@ -3,9 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,5 +16,10 @@ public class UserController {
     @GetMapping("/list")
     public List<User> getList(){
         return userService.list();
+    }
+
+    @PostMapping("/add")
+    public void add(@RequestBody User user){
+        userService.saveUserDetails(user);
     }
 }

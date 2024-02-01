@@ -29,16 +29,16 @@ public class WebSecurityConfig {
         //authenticated()：已认证请求会自动被授权
         http
                 .authorizeRequests(authorize -> authorize.anyRequest().authenticated())
-//                .formLogin(withDefaults())//表单授权方式
+                .formLogin(withDefaults())//表单授权方式
                 .httpBasic(withDefaults());//基本授权方式
-
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        DBUserDetailManager manager = new DBUserDetailManager();
-
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        DBUserDetailManager manager = new DBUserDetailManager();
+//
+//        return manager;
+//    }
 }
